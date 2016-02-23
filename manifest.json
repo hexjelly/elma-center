@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+  "name": "Elma Center",
+  "version": "0.0.1",
+  "default_locale": "en",
+  "description": "Elasto Mania tools",
+  "icons": { "16": "images/icon16.png",
+             "48": "images/icon48.png",
+            "128": "images/icon128.png" },
+  "browser_action": {
+    "default_title": "Elma Center",
+    "default_popup": "popup.html"
+  },
+  "author": "hexjelly",
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "offline_enabled": true,
+  "options_page": "options.html",
+  "permissions": [
+    "alarms",
+    "clipboardRead",
+    "clipboardWrite",
+    "notifications",
+    "storage"]
+}
