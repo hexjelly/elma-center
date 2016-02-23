@@ -3,11 +3,13 @@
   "name": "Elma Center",
   "version": "0.0.1",
   "default_locale": "en",
-  "description": "Elasto Mania tools",
+  "description": "Elasto Mania battle notifier and miscellaneous tools",
   "icons": { "16": "images/icon16.png",
+             "19": "images/icon19.png",
              "48": "images/icon48.png",
             "128": "images/icon128.png" },
   "browser_action": {
+    "default_icon": "images/icon19.png",
     "default_title": "Elma Center",
     "default_popup": "popup.html"
   },
@@ -22,5 +24,7 @@
     "clipboardRead",
     "clipboardWrite",
     "notifications",
-    "storage"]
+    "storage",
+    "http://*.elmaonline.net/*",
+    "http://108.61.164.75:8880/*"]
 }
