@@ -1,12 +1,12 @@
 {
   "manifest_version": 2,
-  "name": "Elma Center",
+  "name": "__MSG_extName__",
   "version": "0.0.1",
   "default_locale": "en",
   "description": "Elasto Mania battle notifier and miscellaneous tools",
   "icons": { "16": "images/icon16.png",
              "19": "images/icon19.png",
-             "48": "images/icon48.png",
+             "64": "images/icon64.png",
             "128": "images/icon128.png" },
   "browser_action": {
     "default_icon": "images/icon19.png",
