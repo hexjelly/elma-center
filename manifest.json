@@ -18,7 +18,10 @@
     "scripts": ["background.js"]
   },
   "offline_enabled": true,
-  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
   "permissions": [
     "alarms",
     "clipboardRead",
