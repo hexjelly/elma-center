@@ -1,7 +1,6 @@
 /* jshint esversion: 6 */
 window.onload = () => {
   translate('name', 'title', 'extName');
-  translate('id', 'test', 'extName');
 };
 
 function translate (type, name, message) {

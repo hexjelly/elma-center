@@ -5,5 +5,3 @@ function setTimeIndicator (time) {
 }
 
 setTimeIndicator();
-
-// •

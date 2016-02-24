@@ -8,6 +8,22 @@
       body {
         font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
         font-size: 100%;
+        background-color: rgb(25, 25, 25);
+        color: rgb(235, 235, 235);
+      }
+      nav {
+        display: flex;
+        background-color: rgb(45, 45, 45);
+      }
+      nav > div {
+        margin: 0 5px 0 5px;
+        padding: 0 5px 0 5px;
+        border-bottom: 2px solid rgb(100, 100, 100);
+        /* background-color: rgb(45, 45, 45); */
+      }
+
+      .activeTab {
+        border-bottom: 2px solid rgb(106, 161, 33);
       }
     </style>
 
@@ -15,7 +31,15 @@
   </head>
 
   <body>
-    <p id="test">Test</p>
+    <nav>
+      <div class="activeTab">Battle</div>
+      <div>oke</div>
+      <div>test2</div>
+    </nav>
+
+    <div id="main">
+      Test
+    </div>
   </body>
 
 </html>
