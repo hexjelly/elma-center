@@ -2,5 +2,8 @@
   "extName": {
     "message": "Elma Center",
     "description": "Extension name"
-  }
+  },
+  "battle": { "message": "Battle" },
+  "by": { "message": "by" },
+  "normalBattle": { "message": "Normal battle" }
 }

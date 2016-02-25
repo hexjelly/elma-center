@@ -1,11 +1,21 @@
 /* jshint esversion: 6 */
 window.onload = () => {
   translate('name', 'title', 'extName');
+  translate('id', 'battleLink', 'battle');
+  translate('id', 'battleInfo', 'normalBattle');
+  translate('class', 'by', 'by');
 };
 
 function translate (type, name, message) {
   if (type === 'name') document.getElementsByTagName(name)[0].innerHTML = chrome.i18n.getMessage(message);
   else if (type === 'id') document.getElementById(name).innerHTML = chrome.i18n.getMessage(message);
+  else if (type === 'class') {
+    var elements = document.getElementsByClassName(name);
+    console.log(elements.length);
+    for (var i = 0; i < elements.length; i++) {
+      elements[i].innerHTML = chrome.i18n.getMessage(message);
+    }
+  }
 }
 
 /*

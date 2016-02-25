@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "__MSG_extName__",
   "version": "0.0.1",
-  "default_locale": "en",
+  "default_locale": "fi",
   "description": "Elasto Mania battle notifier and miscellaneous tools",
   "icons": { "16": "images/icon16.png",
              "19": "images/icon19.png",
