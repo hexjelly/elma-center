@@ -10,10 +10,16 @@
         font-size: 100%;
         background-color: rgb(25, 25, 25);
         color: rgb(235, 235, 235);
+        padding: 0;
+        margin: 0;
+      }
+      main {
+        padding: 20px;
       }
       nav {
         display: flex;
         background-color: rgb(45, 45, 45);
+        padding: 3px 5px 0 5px;
       }
       nav > div {
         margin: 0 5px 0 5px;
@@ -21,9 +27,30 @@
         border-bottom: 2px solid rgb(100, 100, 100);
         /* background-color: rgb(45, 45, 45); */
       }
-
+      nav > div:not(.activeTab):hover {
+        border-bottom: 2px solid rgb(230, 230, 230);
+        cursor: pointer;
+      }
       .activeTab {
         border-bottom: 2px solid rgb(106, 161, 33);
+      }
+      #battle {
+        text-align: center;
+      }
+      main > section {
+
+      }
+      main img {
+        margin: 5px 0 5px 0;
+        max-width: 350px;
+        border: 2px solid black;
+      }
+      #battleInfo {
+        font-size: 80%;
+      }
+      #levelInfo {
+        font-size: 100%;
+        font-weight: bold;
       }
     </style>
 
@@ -37,9 +64,16 @@
       <div>test2</div>
     </nav>
 
-    <div id="main">
-      Test
-    </div>
+    <main>
+      <section id="battle">
+        <header id="levelInfo">Tutor14.lev by ???</header>
+        <header id="battleInfo">Normal battle</header>
+        <img src="http://elmaonline.net/images/map/6234/850/850">
+        <div id="timer">10:31 / 15:00</div>
+      </section>
+      <section id="oke"></section>
+      <section id="test2"></section>
+    </main>
   </body>
 
 </html>
