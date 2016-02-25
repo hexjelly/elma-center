@@ -11,4 +11,4 @@ Localization support for additional languages.
 | notifications | Notification pop-up of new battles starting |
 | storage | Save extension settings and synchronization support |
 | http://\*.elmaonline.net/\* | Level information, maps |
-| http://108.61.164.75:8880/\* | domi/bene server API for battles |
+| http://108.61.164.75:8880/* | domi/bene server API for battles |
