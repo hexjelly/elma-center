@@ -23,7 +23,6 @@
     "chrome_style": true
   },
   "permissions": [
-    "alarms",
     "clipboardRead",
     "clipboardWrite",
     "notifications",
