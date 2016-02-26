@@ -3,7 +3,7 @@ window.onload = () => {
   /* TODO: put in some if (localizationEnabled) block in case people who use non-english browser still wants english extension? */
   translate('name', 'title', 'extName');
   translate('id', 'battleLink', 'battle');
-  translate('id', 'battleInfo', 'normalBattle');
+  translate('id', 'battleType', 'normalBattle');
   translate('class', 'by', 'by');
 };
 

@@ -18,5 +18,7 @@ function stopBackground () {
   setTimeIndicator(false);
 }
 
+// TODO: remember to only fetch level info once for each lev hurr durr!
+
 // start background processing
 startBackground();

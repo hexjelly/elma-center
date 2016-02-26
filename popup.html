@@ -37,7 +37,7 @@
       .activeTab {
         border-bottom: 2px solid rgb(106, 161, 33);
       }
-      #battle {
+      #battleInfo {
         text-align: center;
       }
       main > section {
@@ -48,7 +48,7 @@
         border: 1px solid rgb(5, 5, 5);
         max-width: 100%;
       }
-      #battleInfo {
+      #battleType {
         font-size: 80%;
         color: rgb(150, 150, 150);
       }
@@ -56,6 +56,16 @@
         font-size: 100%;
         font-weight: bold;
       }
+      #levelFile {
+        color: rgb(200, 200, 200);
+        border-bottom: 1px dashed rgb(75, 75, 75);
+        text-decoration: none;
+      }
+      #levelFile:hover {
+        border-color: rgb(106, 161, 33);
+        color: white;
+      }
+
     </style>
 
     <script src="popup.js"></script>
@@ -69,11 +79,11 @@
     </nav>
 
     <main>
-      <section id="battle">
-        <header id="levelInfo">Tutor14.lev <span class="by">by</span> ???</header>
-        <header id="battleInfo">Normal battle</header>
-        <img src="http://elmaonline.net/images/map/6234/850/850">
-        <div id="timer">10:31 / 15:00</div>
+      <section id="battleInfo">
+        <header id="levelInfo"><a href="" id="levelFile">Tutor14.lev</a> <span class="by">by</span> <span id="designer">???</span></header>
+        <header id="battleType">Normal battle</header>
+        <img id="battleMap" src="http://elmaonline.net/images/map/6234/850/850">
+        <div id="battleTimer">10:31 / 15:00</div>
       </section>
       <section id="oke"></section>
       <section id="test2"></section>
