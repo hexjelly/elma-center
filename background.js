@@ -25,7 +25,7 @@ const TYPES = [
 var APIurl = "http://108.61.164.75:8880/current_battle?json=1";
 var EOLurl = "http://elmaonline.net/battles/";
 
-// XHR requests
+// XHR requests, with promises
 function getURL(url) {
   return new Promise((resolve, reject) => {
     var req = new XMLHttpRequest();
@@ -67,19 +67,20 @@ function getBattleInfo () {
     } else {
 
     }
-    
+
     console.log(res);
   });
 }
 
 // start watching for new battles
 function startBackground () {
-  setTimeIndicatorIcon(10);
+  // TODO: put timers and stuff
 }
 
 // stop watching for new battles
 function stopBackground () {
   setTimeIndicatorIcon(false);
+  // TODO: remove timers etc. obv...
 }
 
 // start background processing
