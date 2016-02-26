@@ -5,8 +5,12 @@
   <head>
     <title>Elma Center</title>
     <style>
+      @font-face {
+        font-family: "FontAwesome";
+        src: url("font/fontawesome-webfont.woff") format("woff");
+      }
       body {
-        font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
+        font-family: "Segoe UI", "Lucida Grande", "Tahoma", "sans-serif";
         font-size: 100%;
         background-color: rgb(35, 35, 35);
         color: rgb(235, 235, 235);
@@ -43,7 +47,7 @@
       main > section {
 
       }
-      main img {
+      #battleMap {
         margin: 5px 0 0 0;
         border: 1px solid rgb(5, 5, 5);
         max-width: 100%;
@@ -65,7 +69,9 @@
         border-color: rgb(106, 161, 33);
         color: white;
       }
-
+      .icon {
+        font-family: "FontAwesome";
+      }
     </style>
 
     <script src="popup.js"></script>
@@ -83,7 +89,7 @@
         <header id="levelInfo"><a href="" id="levelFile">Tutor14.lev</a> <span class="by">by</span> <span id="designer">???</span></header>
         <header id="battleType">Normal battle</header>
         <img id="battleMap" src="http://elmaonline.net/images/map/6234/850/850">
-        <div id="timer"><span id="timeLeft">10:31</span> / <span id="battleTime">15:00</span></div>
+        <div id="timer"><span class="icon">&#xf017;</span> 10:31</span> / <span id="battleTime">15:00</span></div>
       </section>
       <section id="oke"></section>
       <section id="test2"></section>
