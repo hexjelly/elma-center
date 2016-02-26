@@ -15,7 +15,8 @@
   },
   "author": "hexjelly",
   "background": {
-    "scripts": ["background.js"]
+    "scripts": ["background.js"],
+    "persistent": true
   },
   "offline_enabled": true,
   "options_ui": {
