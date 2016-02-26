@@ -1,6 +1,6 @@
 /* jshint esversion: 6 */
 
-// battle API
+// battle API mode flags
 const FLAGS = [
   { "mask": 1, "attr": "See others" },
   { "mask": 2, "attr": "See times" },
@@ -17,14 +17,40 @@ const FLAGS = [
   { "mask": 8192, "attr": "Multi" }
 ];
 
+// battle API battle type
 const TYPES = [
   "Normal", "One life", "First finish", "Slowness", "Survivor", "Last result", "Finish count", "1 Hour TT", "Flag tag", "Apple", "Speed"
 ];
 
+var APIurl = "http://108.61.164.75:8880/current_battle?json=1";
+var EOLurl = "http://elmaonline.net/battles/";
+
+// XHR requests
+function getURL(url) {
+  return new Promise((resolve, reject) => {
+    var req = new XMLHttpRequest();
+    req.open('GET', url);
+
+    req.onload = () => {
+      if (req.status == 200) {
+        resolve(req.response);
+      } else {
+        reject(Error(req.statusText));
+      }
+    };
+
+    req.onerror = () => {
+      reject(Error("Network Error"));
+    };
+
+    req.send();
+  });
+}
+
 // sets extension icon badge color based on time left of battle
 function setTimeIndicatorIcon (time) {
   if (time === false) {
-    chrome.browserAction.setBadgeText(null);
+    chrome.browserAction.setBadgeText({text: ''});
   }
   chrome.browserAction.setBadgeBackgroundColor({color:[106, 161, 33, 255]});
   chrome.browserAction.setBadgeText({text: "\u00A0"});
@@ -32,17 +58,28 @@ function setTimeIndicatorIcon (time) {
 
 // TODO: remember to only fetch level info once for each lev hurr durr!
 function getBattleInfo () {
+  getURL(APIurl).then(response => {
+    var res = JSON.parse(response);
 
+    // battle is currently active (probably)
+    if (Object.keys(res).length > 0) {
+
+    } else {
+
+    }
+    
+    console.log(res);
+  });
 }
 
 // start watching for new battles
 function startBackground () {
-  setTimeIndicator(10);
+  setTimeIndicatorIcon(10);
 }
 
 // stop watching for new battles
 function stopBackground () {
-  setTimeIndicator(false);
+  setTimeIndicatorIcon(false);
 }
 
 // start background processing
