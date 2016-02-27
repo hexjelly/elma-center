@@ -48,12 +48,24 @@ function getURL(url) {
 }
 
 // sets extension icon badge color based on time left of battle
-function setTimeIndicatorIcon (time) {
-  if (time === false) {
-    chrome.browserAction.setBadgeText({text: ''});
+function setTimeIndicatorIcon (timeState) {
+  switch (timeState) {
+    case 'green':
+      chrome.browserAction.setBadgeText({text: "\u00A0"}); // invisible character
+      chrome.browserAction.setBadgeBackgroundColor({color:[106, 161, 33, 255]});
+      break;
+    case 'yellow':
+      chrome.browserAction.setBadgeText({text: "\u00A0"}); // invisible character
+      chrome.browserAction.setBadgeBackgroundColor({color:[245, 219, 49, 255]});
+      break;
+    case 'red':
+      chrome.browserAction.setBadgeText({text: "\u00A0"}); // invisible character
+      chrome.browserAction.setBadgeBackgroundColor({color:[224, 27, 27, 255]});
+      break;
+    default:
+      chrome.browserAction.setBadgeText({text: ''}); // empty string removes badge
+      break;
   }
-  chrome.browserAction.setBadgeBackgroundColor({color:[106, 161, 33, 255]});
-  chrome.browserAction.setBadgeText({text: "\u00A0"});
 }
 
 // TODO: remember to only fetch level info once for each lev hurr durr!
