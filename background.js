@@ -33,7 +33,7 @@ function getURL(url) {
 
     req.onload = () => {
       if (req.status == 200) {
-        resolve(req.response);
+        resolve(req.responseText);
       } else {
         reject(Error(req.statusText));
       }
@@ -78,7 +78,15 @@ function getBattleInfo () {
         if (res.id === battle.id) {
           // same battle
         } else {
-          // new, fetch map etc.
+          // new, fetch map from EOL site
+          getURL(EOLurl + res.id).then(response => {
+            var tempDOM = document.createElement('div');
+            tempDOM.innerHTML = response;
+            // getElementById not working for whatever reason, ghetto querySelector instead
+            var map = tempDOM.querySelector('#right').getElementsByTagName("img")[0].getAttribute("src");
+          });
+          res.map = map;
+          chrome.storage.sync.set({ "battle": res });
         }
       });
     } else { // no battle active
