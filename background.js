@@ -72,21 +72,17 @@ function setTimeIndicatorIcon (timeState) {
 function getBattleInfo () {
   getURL(APIurl).then(response => {
     var res = JSON.parse(response);
-    // battle is currently active (probably)
-    if (Object.keys(res).length > 0) {
-      // check if battle id is the same we already have
+    if (res.id) { // battle probably active if we get a battle id
       chrome.storage.sync.get("battle", result => {
-        if (res.id === result.battle.id) {
-          // same battle
+        if (res.id === result.battle.id) { // if we already have battle info, skip fetching map etc.
           console.log('not new!');
-        } else {
-          // new, fetch map from EOL site
+        } else { // new battle, fetch map from EOL site
           getMap(res.id).then(map => {
             res.map = map;
             chrome.storage.sync.set({ "battle": res });
+            console.log('new');
+            console.log(res);
           });
-          console.log('new');
-          console.log(res);
         }
       });
     } else { // no battle active
