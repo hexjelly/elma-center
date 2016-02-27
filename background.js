@@ -68,32 +68,43 @@ function setTimeIndicatorIcon (timeState) {
   }
 }
 
+
 function getBattleInfo () {
   getURL(APIurl).then(response => {
     var res = JSON.parse(response);
     // battle is currently active (probably)
     if (Object.keys(res).length > 0) {
       // check if battle id is the same we already have
-      chrome.storage.sync.get("battle", battle => {
-        if (res.id === battle.id) {
+      chrome.storage.sync.get("battle", result => {
+        if (res.id === result.battle.id) {
           // same battle
+          console.log('not new!');
         } else {
           // new, fetch map from EOL site
-          getURL(EOLurl + res.id).then(response => {
-            var tempDOM = document.createElement('div');
-            tempDOM.innerHTML = response;
-            // getElementById not working for whatever reason, ghetto querySelector instead
-            var map = tempDOM.querySelector('#right').getElementsByTagName("img")[0].getAttribute("src");
+          getMap(res.id).then(map => {
+            res.map = map;
+            chrome.storage.sync.set({ "battle": res });
           });
-          res.map = map;
-          chrome.storage.sync.set({ "battle": res });
+          console.log('new');
+          console.log(res);
         }
       });
     } else { // no battle active
       chrome.storage.sync.set({ "battle": {} });
+      console.log('no battle');
     }
+  });
+}
 
-    console.log(res);
+function getMap (id) {
+  return new Promise((resolve, reject) => {
+    getURL(EOLurl + id).then(response => {
+      var tempDOM = document.createElement('div');
+      tempDOM.innerHTML = response;
+      // getElementById not working for whatever reason, ghetto querySelector instead
+      var map = tempDOM.querySelector('#right').getElementsByTagName("img")[0].getAttribute("src");
+      resolve(map);
+    });
   });
 }
 
