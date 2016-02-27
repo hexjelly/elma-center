@@ -74,15 +74,15 @@ function getBattleInfo () {
     // battle is currently active (probably)
     if (Object.keys(res).length > 0) {
       // check if battle id is the same we already have
-      chrome.storage.sync.get({ battle }, battle => {
+      chrome.storage.sync.get("battle", battle => {
         if (res.id === battle.id) {
           // same battle
         } else {
           // new, fetch map etc.
         }
       });
-    } else {
-
+    } else { // no battle active
+      chrome.storage.sync.set({ "battle": {} });
     }
 
     console.log(res);
