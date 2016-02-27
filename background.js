@@ -68,14 +68,19 @@ function setTimeIndicatorIcon (timeState) {
   }
 }
 
-// TODO: remember to only fetch level info once for each lev hurr durr!
 function getBattleInfo () {
   getURL(APIurl).then(response => {
     var res = JSON.parse(response);
-
     // battle is currently active (probably)
     if (Object.keys(res).length > 0) {
-
+      // check if battle id is the same we already have
+      chrome.storage.sync.get({ battle }, battle => {
+        if (res.id === battle.id) {
+          // same battle
+        } else {
+          // new, fetch map etc.
+        }
+      });
     } else {
 
     }
