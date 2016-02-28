@@ -17,7 +17,6 @@ function translate (type, name, message) {
       break;
     case 'class':
       var elements = document.getElementsByClassName(name);
-      console.log(elements.length);
       for (var i = 0; i < elements.length; i++) {
         elements[i].innerHTML = chrome.i18n.getMessage(message);
       }
@@ -41,6 +40,7 @@ function loadBattleInfo () {
 
     } else { // no battle
       document.getElementById('levelInfo').innerHTML = "No battle active";
+      document.getElementById('timer').innerHTML = '';
     }
   });
 }
