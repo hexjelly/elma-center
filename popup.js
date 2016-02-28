@@ -7,14 +7,20 @@ window.onload = () => {
 };
 
 function translate (type, name, message) {
-  if (type === 'name') document.getElementsByTagName(name)[0].innerHTML = chrome.i18n.getMessage(message);
-  else if (type === 'id') document.getElementById(name).innerHTML = chrome.i18n.getMessage(message);
-  else if (type === 'class') {
-    var elements = document.getElementsByClassName(name);
-    console.log(elements.length);
-    for (var i = 0; i < elements.length; i++) {
-      elements[i].innerHTML = chrome.i18n.getMessage(message);
-    }
+  switch (type) {
+    case 'name':
+      document.getElementsByTagName(name)[0].innerHTML = chrome.i18n.getMessage(message);
+      break;
+    case 'id':
+      document.getElementById(name).innerHTML = chrome.i18n.getMessage(message);
+      break;
+    case 'class':
+      var elements = document.getElementsByClassName(name);
+      console.log(elements.length);
+      for (var i = 0; i < elements.length; i++) {
+        elements[i].innerHTML = chrome.i18n.getMessage(message);
+      }
+      break;
   }
 }
 
