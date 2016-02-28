@@ -113,8 +113,31 @@ function BattleTimer (duration, elapsed) {
 }
 
 BattleTimer.prototype.start = function () {
-  // this.timer = setInterval(getBattleInfo,10000);
+  this.active = true;
+  this.tick();
 };
+
+BattleTimer.prototype.tick = function (ms) {
+  if (this.active) {
+    // TODO: let user specify threshholds?
+    // if time over half: green icon
+    // if time under half, over quart: yellow icon
+    // if time below quarter: red icon
+
+    // TODO: set interval higher when new battle started:
+    // Check time left, start at 2m if >2m left (in case aborted),
+    // then increment down to match end of battle, then wait 2mins and 10s interval again?
+    var timer = ms || 10000;
+    setTimeout(() => {
+      this.tick();
+    }, ms);
+  }
+};
+
+BattleTimer.prototype.stop = function () {
+  this.active = false;
+};
+
 
 // new battle
 function newBattle () {
@@ -135,6 +158,7 @@ function startBackground () {
 function stopBackground () {
   setTimeIndicatorIcon(false);
   // TODO: remove timers etc. obv...
+  timer.stop();
 }
 
 // start background processing
