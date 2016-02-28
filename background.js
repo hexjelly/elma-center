@@ -24,6 +24,7 @@ const TYPES = [
 
 var APIurl = "http://108.61.164.75:8880/current_battle?json=1";
 var EOLurl = "http://elmaonline.net/battles/";
+var timer;
 
 // XHR requests, with promises
 function getURL(url) {
@@ -102,6 +103,27 @@ function getMap (id) {
       resolve(map);
     });
   });
+}
+
+timer = new BattleTimer();
+
+function BattleTimer (duration, elapsed) {
+  this.duration = duration;
+  this.elapsed = elapsed;
+}
+
+BattleTimer.prototype.start = function () {
+  // this.timer = setInterval(getBattleInfo,10000);
+};
+
+// new battle
+function newBattle () {
+  notifyBattle();
+}
+
+// notify
+function notifyBattle () {
+
 }
 
 // start watching for new battles
