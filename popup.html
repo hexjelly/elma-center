@@ -72,6 +72,20 @@
       .icon {
         font-family: "FontAwesome";
       }
+      .hide {
+        display: none;
+      }
+      #information {
+        font-size: 85%;
+      }
+      #information a {
+        color: rgb(150, 150, 150);
+        text-decoration: none;
+      }
+      #information a:hover {
+        color: rgb(190, 190, 190);
+        cursor: pointer;
+      }
     </style>
 
     <script src="popup.js"></script>
@@ -79,9 +93,9 @@
 
   <body>
     <nav>
-      <div id="battleLink" class="activeTab">Battle</div>
-      <div>oke</div>
-      <div>test2</div>
+      <div id="battleLink" class="activeTab"><span class="icon">&#xf091;</span> Battle</div>
+      <div id="optionsLink"><span class="icon">&#xf013;</span> Options</div>
+      <div id="infoLink"><span class="icon">&#xf05a;</span> Info</div>
     </nav>
 
     <main>
@@ -91,8 +105,13 @@
         <div id="battleMap"></div>
         <div id="timer"></div>
       </section>
-      <section id="oke"></section>
-      <section id="test2"></section>
+      <section id="options">
+      </section>
+      <section id="information">
+        <div><a href="https://github.com/hexjelly/elma-center/" target="_blank"><span class="icon">&#xf09b;</span> Github</a> Source code</div>
+        <div><a href=""><span class="icon">&#xf1a0;</span> Google Webstore</a> Extension page</div>
+        <div><a href=""><span class="icon">&#xf08e;</span> Mopolauta</a> Comments, discussion, ideas.</div>
+      </section>
     </main>
   </body>
 

@@ -10,5 +10,6 @@ Localization support for additional languages.
 | clipboardWrite | Future implementation, possibly for recsource etc. |
 | notifications | Notification pop-up of new battles starting |
 | storage | Save extension settings and synchronization support |
+| tabs | Open links from popup window |
 | http://\*.elmaonline.net/\* | Level information, maps |
 | http://<i></i>108.61.164.75:8880/* | domi/bene server API for battles |

@@ -142,7 +142,7 @@ function newBattle () {
 
 // notifications
 function notifyBattle () {
-  chrome.storage.sync.get("battle", result => {
+  chrome.storage.sync.get("battle", res => {
     if (res.id) {
       var battleFlags = [];
       FLAGS.forEach(flag => {
