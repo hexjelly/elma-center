@@ -142,13 +142,23 @@ function newBattle () {
 
 // notifications
 function notifyBattle () {
-  chrome.notifications.create('NewBattle', {
-    type: 'image',
-    iconUrl: 'images/icon128.png',
-    imageUrl: '',
-    title: "New battle",
-    message: "hello there!"
-    });
+  chrome.storage.sync.get("battle", result => {
+    if (res.id) {
+      var battleFlags = [];
+      FLAGS.forEach(flag => {
+        if (res.battle_attrs & flag) {
+          battleFlags.append();
+        }
+      });
+      chrome.notifications.create('NewBattle', {
+        type: 'image',
+        iconUrl: 'images/icon128.png',
+        imageUrl: res.map,
+        title: TYPES[res.battle_type] + " battle by " + res.designer,
+        message: battleFlags.join(', ')
+      });
+    }
+  });
 }
 
 // start watching for new battles
