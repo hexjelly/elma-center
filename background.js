@@ -124,9 +124,6 @@ BattleTimer.prototype.tick = function (ms) {
     // if time under half, over quart: yellow icon
     // if time below quarter: red icon
 
-    // TODO: set interval higher when new battle started:
-    // Check time left, start at 2m if >2m left (in case aborted),
-    // then increment down to match end of battle, then wait 2mins and 10s interval again?
     var timer = ms || 10000;
     setTimeout(() => {
       this.tick();
@@ -138,15 +135,20 @@ BattleTimer.prototype.stop = function () {
   this.active = false;
 };
 
-
 // new battle
 function newBattle () {
   notifyBattle();
 }
 
-// notify
+// notifications
 function notifyBattle () {
-
+  chrome.notifications.create('NewBattle', {
+    type: 'image',
+    iconUrl: 'images/icon128.png',
+    imageUrl: '',
+    title: "New battle",
+    message: "hello there!"
+    });
 }
 
 // start watching for new battles
