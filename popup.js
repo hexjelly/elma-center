@@ -4,6 +4,7 @@ window.onload = () => {
   translate('name', 'title', 'extName');
   translate('id', 'battleLink', 'battle');
   translate('class', 'by', 'by');
+  loadBattleInfo();
 };
 
 function translate (type, name, message) {
@@ -24,13 +25,22 @@ function translate (type, name, message) {
   }
 }
 
-/*
-chrome.browserAction.onClicked.addListener(function(tab) {
+// load battle info from storage and display it
+function loadBattleInfo () {
+  chrome.storage.sync.get("battle", result => {
+    if (result.battle.id) { // there's a battle active
+      var file = result.battle.file_name;
+      var designer = result.battle.designer;
+      var html;
 
-    var port = chrome.extension.connect({name: "Sample Communication"});
-    port.postMessage("Hi BackGround");
-    port.onMessage.addListener(function(msg) {
-            console.log("message recieved"+ msg);
-    });
+      html = '<a href="" id="levelFile">' + file + '</a> by <span id="designer">' + designer + '</span>';
+      document.getElementById('levelInfo').innerHTML = html;
 
-}); */
+      html = '<span class="icon">&#xf017;</span> <span id="timeLeft"></span> / <span id="battleTime"></span>';
+      document.getElementById('timer').innerHTML = html;
+
+    } else { // no battle
+      document.getElementById('levelInfo').innerHTML = "No battle active";
+    }
+  });
+}
