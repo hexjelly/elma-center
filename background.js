@@ -75,17 +75,15 @@ function getBattleInfo () {
   getURL(APIurl).then(response => {
     var res = JSON.parse(response);
     if (res.id) { // battle probably active if we get a battle id
-      if (battle.id) {
-        if (res.id === battle.id) { // not new battle, skip fetching map etc.
-          console.log('not new battle');
-        } else { // new battle, fetch map from EOL site
-          getMap(res.id).then(map => {
-            res.map = map;
-            battle = res;
-            console.log('new');
-            console.log(res);
-          });
-        }
+      if (battle.id && (res.id === battle.id)) { // not new battle, skip fetching map etc.
+        console.log('not new battle');
+      } else { // new battle, fetch map from EOL site
+        getMap(res.id).then(map => {
+          battle = res;
+          battle.map = map;
+          console.log('new');
+          console.log(battle);
+        });
       }
     } else { // no battle active
       battle = {};
