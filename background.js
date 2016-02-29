@@ -25,6 +25,7 @@ const TYPES = [
 var APIurl = "http://108.61.164.75:8880/current_battle?json=1";
 var EOLurl = "http://elmaonline.net/battles/";
 var timer;
+var battle = {};
 
 // XHR requests, with promises
 function getURL(url) {
@@ -74,20 +75,20 @@ function getBattleInfo () {
   getURL(APIurl).then(response => {
     var res = JSON.parse(response);
     if (res.id) { // battle probably active if we get a battle id
-      chrome.storage.sync.get("battle", result => {
-        if (res.id === result.battle.id) { // if we already have battle info, skip fetching map etc.
-          console.log('not new!');
+      if (battle.id) {
+        if (res.id === battle.id) { // not new battle, skip fetching map etc.
+          console.log('not new battle');
         } else { // new battle, fetch map from EOL site
           getMap(res.id).then(map => {
             res.map = map;
-            chrome.storage.sync.set({ "battle": res });
+            battle = res;
             console.log('new');
             console.log(res);
           });
         }
-      });
+      }
     } else { // no battle active
-      chrome.storage.sync.set({ "battle": {} });
+      battle = {};
       console.log('no battle');
     }
   });
@@ -127,7 +128,8 @@ BattleTimer.prototype.tick = function (ms) {
     var timer = ms || 10000;
     setTimeout(() => {
       this.tick();
-    }, ms);
+      console.log('tick tock');
+    }, timer);
   }
 };
 
@@ -142,23 +144,21 @@ function newBattle () {
 
 // notifications
 function notifyBattle () {
-  chrome.storage.sync.get("battle", res => {
-    if (res.id) {
-      var battleFlags = [];
-      FLAGS.forEach(flag => {
-        if (res.battle_attrs & flag) {
-          battleFlags.append();
-        }
-      });
-      chrome.notifications.create('NewBattle', {
-        type: 'image',
-        iconUrl: 'images/icon128.png',
-        imageUrl: res.map,
-        title: TYPES[res.battle_type] + " battle by " + res.designer,
-        message: battleFlags.join(', ')
-      });
-    }
-  });
+  if (battle.id) {
+    var battleFlags = [];
+    FLAGS.forEach(flag => {
+      if (battle.battle_attrs & flag) {
+        battleFlags.append(flag.attr);
+      }
+    });
+    chrome.notifications.create('NewBattle', {
+      type: 'image',
+      iconUrl: 'images/icon128.png',
+      imageUrl: battle.map,
+      title: TYPES[battle.battle_type] + " battle by " + battle.designer,
+      message: battleFlags.join(', ')
+    });
+  }
 }
 
 // start watching for new battles
