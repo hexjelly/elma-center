@@ -25,10 +25,10 @@ function translate (type, name, message) {
 
 // load battle info from storage and display it
 function loadBattleInfo () {
-  chrome.storage.sync.get("battle", result => {
-    if (result.battle.id) { // there's a battle active
-      var file = result.battle.file_name;
-      var designer = result.battle.designer;
+  chrome.runtime.sendMessage('battle', battle => {
+    if (battle.id) { // there's a battle active
+      var file = battle.file_name;
+      var designer = battle.designer;
       var html;
 
       html = '<a href="" id="levelFile">' + file + '</a> by <span id="designer">' + designer + '</span>';

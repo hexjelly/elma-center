@@ -70,28 +70,24 @@ function setTimeIndicatorIcon (timeState) {
   }
 }
 
-
+// get battle info from battle API and EOL
 function getBattleInfo () {
   getURL(APIurl).then(response => {
     var res = JSON.parse(response);
     if (res.id) { // battle probably active if we get a battle id
-      if (battle.id && (res.id === battle.id)) { // not new battle, skip fetching map etc.
-        console.log('not new battle');
-      } else { // new battle, fetch map from EOL site
+      if (battle.id && res.id !== battle.id) { // new battle
         getMap(res.id).then(map => {
           battle = res;
           battle.map = map;
-          console.log('new');
-          console.log(battle);
         });
       }
     } else { // no battle active
       battle = {};
-      console.log('no battle');
     }
   });
 }
 
+// get map from EOL
 function getMap (id) {
   return new Promise((resolve, reject) => {
     getURL(EOLurl + id).then(response => {
@@ -145,16 +141,17 @@ function notifyBattle () {
   if (battle.id) {
     var battleFlags = [];
     FLAGS.forEach(flag => {
-      if (battle.battle_attrs & flag) {
-        battleFlags.append(flag.attr);
+      if (battle.battle_attrs & flag.mask) {
+        battleFlags.push(flag.attr);
       }
     });
+    console.log(battleFlags);
     chrome.notifications.create('NewBattle', {
       type: 'image',
       iconUrl: 'images/icon128.png',
       imageUrl: battle.map,
-      title: TYPES[battle.battle_type] + " battle by " + battle.designer,
-      message: battleFlags.join(', ')
+      title: battle.file_name + " by " + battle.designer,
+      message: TYPES[battle.battle_type] + " battle " + battle.duration/60 + 'm\n' + battleFlags.join(', ')
     });
   }
 }
@@ -162,6 +159,11 @@ function notifyBattle () {
 // start watching for new battles
 function startBackground () {
   // TODO: put timers and stuff
+  chrome.runtime.onMessage.addListener((request, sender, sendBattle) => {
+    if (request == "battle") {
+      sendBattle(battle);
+    }
+  });
 }
 
 // stop watching for new battles
