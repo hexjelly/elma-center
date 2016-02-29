@@ -79,6 +79,14 @@ function getBattleInfo () {
         getMap(res.id).then(map => {
           battle = res;
           battle.map = map;
+          battle.battleFlags = [];
+          battle.battleType = TYPES[battle.battle_type];
+          FLAGS.forEach(flag => {
+            if (battle.battle_attrs & flag.mask) {
+              battle.battleFlags.push(flag.attr);
+            }
+          });
+          notifyBattle();
         });
       }
     } else { // no battle active
@@ -100,11 +108,7 @@ function getMap (id) {
   });
 }
 
-timer = new BattleTimer();
-
 function BattleTimer (duration, elapsed) {
-  this.duration = duration;
-  this.elapsed = elapsed;
 }
 
 BattleTimer.prototype.start = function () {
@@ -123,6 +127,7 @@ BattleTimer.prototype.tick = function (ms) {
     setTimeout(() => {
       this.tick();
       console.log('tick tock');
+      getBattleInfo();
     }, timer);
   }
 };
@@ -131,34 +136,21 @@ BattleTimer.prototype.stop = function () {
   this.active = false;
 };
 
-// new battle
-function newBattle () {
-  notifyBattle();
-}
-
 // notifications
 function notifyBattle () {
-  if (battle.id) {
-    var battleFlags = [];
-    FLAGS.forEach(flag => {
-      if (battle.battle_attrs & flag.mask) {
-        battleFlags.push(flag.attr);
-      }
-    });
-    console.log(battleFlags);
-    chrome.notifications.create('NewBattle', {
-      type: 'image',
-      iconUrl: 'images/icon128.png',
-      imageUrl: battle.map,
-      title: battle.file_name + " by " + battle.designer,
-      message: TYPES[battle.battle_type] + " battle " + battle.duration/60 + 'm\n' + battleFlags.join(', ')
-    });
-  }
+  chrome.notifications.create('NewBattle', {
+    type: 'image',
+    iconUrl: 'images/icon128.png',
+    imageUrl: battle.map,
+    title: battle.file_name + " by " + battle.designer,
+    message: battle.battleType + " battle " + battle.duration/60 + 'm\n' + battle.battleFlags.join(', ')
+  });
 }
 
 // start watching for new battles
 function startBackground () {
-  // TODO: put timers and stuff
+  timer = new BattleTimer();
+  timer.start();
   chrome.runtime.onMessage.addListener((request, sender, sendBattle) => {
     if (request == "battle") {
       sendBattle(battle);

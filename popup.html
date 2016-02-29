@@ -38,14 +38,17 @@
         border-bottom: 2px solid rgb(230, 230, 230);
         cursor: pointer;
       }
-      .activeTab {
+      nav .activeTab {
         border-bottom: 2px solid rgb(106, 161, 33);
       }
       #battleInfo {
         text-align: center;
       }
       main > section {
-
+        display: none;
+      }
+      main > section.activeTab {
+        display: block;
       }
       #battleMap img {
         margin: 5px 0 0 0;
@@ -92,20 +95,21 @@
   </head>
 
   <body>
-    <nav>
-      <div id="battleLink" class="activeTab"><span class="icon">&#xf091;</span> Battle</div>
-      <div id="optionsLink"><span class="icon">&#xf013;</span> Options</div>
-      <div id="infoLink"><span class="icon">&#xf05a;</span> Info</div>
+    <nav id="nav">
+      <div id="battleLink" class="activeTab" data-link="battleInfo"><span class="icon">&#xf091;</span> Battle</div>
+      <div id="optionsLink" data-link="options"><span class="icon">&#xf013;</span> Options</div>
+      <div id="infoLink" data-link="information"><span class="icon">&#xf05a;</span> Info</div>
     </nav>
 
     <main>
-      <section id="battleInfo">
-        <header id="levelInfo"></header>
+      <section id="battleInfo" class="activeTab">
+        <header id="levelInfo">No battle active</header>
         <header id="battleType"></header>
         <div id="battleMap"></div>
         <div id="timer"></div>
       </section>
       <section id="options">
+        test
       </section>
       <section id="information">
         <div><a href="https://github.com/hexjelly/elma-center/" target="_blank"><span class="icon">&#xf09b;</span> Github</a> Source code</div>
