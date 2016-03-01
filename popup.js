@@ -1,15 +1,6 @@
 /* jshint esversion: 6 */
 
 window.onload = () => {
-  function tabs (){
-    var actives = document.querySelectorAll('.activeTab');
-    for (var i = 0; i < actives.length; i++){
-      actives[i].className = '';
-    }
-    this.className = 'activeTab';
-    document.getElementById(event.target.getAttribute('data-link')).className = 'activeTab';
-  }
-
   var els = document.querySelectorAll('nav > div');
   for (var i = 0; i < els.length; i++) {
     els[i].addEventListener('click', tabs, false);
@@ -17,6 +8,15 @@ window.onload = () => {
 
   loadBattleInfo();
 };
+
+function tabs () {
+  var actives = document.querySelectorAll('.activeTab');
+  for (var i = 0; i < actives.length; i++){
+    actives[i].className = '';
+  }
+  this.className = 'activeTab';
+  document.getElementById(event.target.getAttribute('data-link')).className = 'activeTab';
+}
 
 function translate (type, name, message) {
   switch (type) {
@@ -44,16 +44,16 @@ function loadBattleInfo () {
       var duration = battle.duration;
       var type = battle.battleType;
       var flags = battle.battleFlags;
-      var timeLeft = duration - battle.start_delta;
+      var timeLeft = duration + battle.start_delta;
       var html;
 
-      html = '<a href="" id="levelFile">' + file + '</a> by <span id="designer">' + designer + '</span>';
+      html = '<a href="http://elmaonline.net/battles/' + battle.id + '"" id="levelFile" target="_blank">' + file + '</a> by <span id="designer">' + designer + '</span>';
       document.getElementById('levelInfo').innerHTML = html;
 
       html = '<div>' + type + ' battle</div><div>' + flags.join(', ') + '</div>';
       document.getElementById('battleType').innerHTML = html;
 
-      html = '<span class="icon">&#xf017;</span> <span id="timeLeft"></span> / <span id="battleTime"></span>';
+      html = '<span class="icon">&#xf017;</span> <span id="timeLeft">~' + Math.floor(timeLeft/60) + 'm</span> / <span id="battleTime">' + duration/60 + 'm</span>';
       document.getElementById('timer').innerHTML = html;
 
       html = '<img src="' + battle.map + '">';

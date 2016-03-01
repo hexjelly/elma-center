@@ -75,7 +75,7 @@ function getBattleInfo () {
   getURL(APIurl).then(response => {
     var res = JSON.parse(response);
     if (res.id) { // battle probably active if we get a battle id
-      if (battle.id && res.id !== battle.id) { // new battle
+      if (res.id !== battle.id) { // new battle
         getMap(res.id).then(map => {
           battle = res;
           battle.map = map;
@@ -166,4 +166,4 @@ function stopBackground () {
 }
 
 // start background processing
-startBackground();
+//startBackground();
