@@ -95,7 +95,7 @@ function getBattleInfo () {
   });
 }
 
-// get map from EOL
+// get map and from EOL
 function getMap (id) {
   return new Promise((resolve, reject) => {
     getURL(EOLurl + id).then(response => {
@@ -122,12 +122,12 @@ BattleTimer.prototype.tick = function (ms) {
     // if time over half: green icon
     // if time under half, over quart: yellow icon
     // if time below quarter: red icon
+    console.log('tick tock');
+    getBattleInfo();
 
     var timer = ms || 10000;
     setTimeout(() => {
       this.tick();
-      console.log('tick tock');
-      getBattleInfo();
     }, timer);
   }
 };
@@ -163,6 +163,7 @@ function stopBackground () {
   setTimeIndicatorIcon(false);
   // TODO: remove timers etc. obv...
   timer.stop();
+  battle = {};
 }
 
 // start background processing

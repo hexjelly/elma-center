@@ -1,9 +1,5 @@
 {
-  "extName": {
-    "message": "Elmakeskus",
-    "description": "Extension name"
-  },
-  "battle": { "message": "Battle" },
+  "battle": { "message": "battle" },
   "by": { "message": "tehnyt" },
   "normalBattle": { "message": "Normaali battle" }
 }

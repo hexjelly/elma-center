@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "__MSG_extName__",
+  "name": "Elma Center",
   "version": "0.0.1",
   "default_locale": "en",
   "description": "Elasto Mania battle notifier and miscellaneous tools",
@@ -13,16 +13,12 @@
     "default_title": "Elma Center",
     "default_popup": "popup.html"
   },
-  "author": "hexjelly",
+  "author": "Hexjelly",
   "background": {
     "scripts": ["background.js"],
     "persistent": true
   },
-  "offline_enabled": true,
-  "options_ui": {
-    "page": "options.html",
-    "chrome_style": true
-  },
+  "offline_enabled": false,
   "permissions": [
     "clipboardRead",
     "clipboardWrite",

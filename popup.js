@@ -9,6 +9,7 @@ window.onload = () => {
   loadBattleInfo();
 };
 
+// navigation in popup window
 function tabs () {
   var actives = document.querySelectorAll('.activeTab');
   for (var i = 0; i < actives.length; i++){
@@ -18,24 +19,7 @@ function tabs () {
   document.getElementById(event.target.getAttribute('data-link')).className = 'activeTab';
 }
 
-function translate (type, name, message) {
-  switch (type) {
-    case 'name':
-      document.getElementsByTagName(name)[0].innerHTML = chrome.i18n.getMessage(message);
-      break;
-    case 'id':
-      document.getElementById(name).innerHTML = chrome.i18n.getMessage(message);
-      break;
-    case 'class':
-      var elements = document.getElementsByClassName(name);
-      for (var i = 0; i < elements.length; i++) {
-        elements[i].innerHTML = chrome.i18n.getMessage(message);
-      }
-      break;
-  }
-}
-
-// load battle info from storage and display it
+// load battle info from background page and display it
 function loadBattleInfo () {
   chrome.runtime.sendMessage('battle', battle => {
     if (battle && battle.id) { // there's a battle active
@@ -67,3 +51,34 @@ function loadBattleInfo () {
     }
   });
 }
+
+// save and load settings
+function save_options() {
+  var color = document.getElementById('color').value;
+  var likesColor = document.getElementById('like').checked;
+  chrome.storage.sync.set({
+    favoriteColor: color,
+    likesColor: likesColor
+  }, function() {
+    var status = document.getElementById('status');
+    status.textContent = 'Options saved.';
+    setTimeout(function() {
+      status.textContent = '';
+    }, 750);
+  });
+}
+
+function restore_options() {
+  // Use default value color = 'red' and likesColor = true.
+  chrome.storage.sync.get({
+    favoriteColor: 'red',
+    likesColor: true
+  }, function(items) {
+    document.getElementById('color').value = items.favoriteColor;
+    document.getElementById('like').checked = items.likesColor;
+  });
+}
+
+document.addEventListener('DOMContentLoaded', restore_options);
+document.getElementById('save').addEventListener('click',
+    save_options);
