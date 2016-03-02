@@ -95,7 +95,7 @@ function getBattleInfo () {
   });
 }
 
-// get map and from EOL
+// get map from EOL
 function getMap (id) {
   return new Promise((resolve, reject) => {
     getURL(EOLurl + id).then(response => {
@@ -161,7 +161,6 @@ function startBackground () {
 // stop watching for new battles
 function stopBackground () {
   setTimeIndicatorIcon(false);
-  // TODO: remove timers etc. obv...
   timer.stop();
   battle = {};
 }
