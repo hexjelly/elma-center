@@ -51,22 +51,20 @@ function getURL(url) {
 
 // sets extension icon badge color based on time left of battle
 function setTimeIndicatorIcon (timeState) {
-  switch (timeState) {
-    case 'green':
+  if (timeState) {
+    var percentLeft = (timeState[0] + timeState[1]) / timeState[0];
+    if (percentLeft >= 0.5) {
       chrome.browserAction.setBadgeText({text: "\u00A0"}); // invisible character
       chrome.browserAction.setBadgeBackgroundColor({color:[106, 161, 33, 255]});
-      break;
-    case 'yellow':
+    } else if (percentLeft >= 0.25) {
       chrome.browserAction.setBadgeText({text: "\u00A0"}); // invisible character
       chrome.browserAction.setBadgeBackgroundColor({color:[245, 219, 49, 255]});
-      break;
-    case 'red':
+    } else {
       chrome.browserAction.setBadgeText({text: "\u00A0"}); // invisible character
       chrome.browserAction.setBadgeBackgroundColor({color:[224, 27, 27, 255]});
-      break;
-    default:
-      chrome.browserAction.setBadgeText({text: ''}); // empty string removes badge
-      break;
+    }
+  } else {
+    chrome.browserAction.setBadgeText({text: ''}); // empty string removes badge
   }
 }
 
@@ -76,21 +74,26 @@ function getBattleInfo () {
     var res = JSON.parse(response);
     if (res.id) { // battle probably active if we get a battle id
       if (res.id !== battle.id) { // new battle
+        battle = res;
+        battle.timeReceived = Math.floor(Date.now() / 1000);
+        battle.battleFlags = [];
+        battle.battleType = TYPES[battle.battle_type];
+        FLAGS.forEach(flag => {
+          if (battle.battle_attrs & flag.mask) {
+            battle.battleFlags.push(flag.attr);
+          }
+        });
         getMap(res.id).then(map => {
-          battle = res;
           battle.map = map;
-          battle.battleFlags = [];
-          battle.battleType = TYPES[battle.battle_type];
-          FLAGS.forEach(flag => {
-            if (battle.battle_attrs & flag.mask) {
-              battle.battleFlags.push(flag.attr);
-            }
-          });
           notifyBattle();
         });
+      } else { // not new
+
       }
+      setTimeIndicatorIcon([res.duration, res.start_delta]);
     } else { // no battle active
       battle = {};
+      setTimeIndicatorIcon(false);
     }
   });
 }
@@ -108,7 +111,7 @@ function getMap (id) {
   });
 }
 
-function BattleTimer (duration, elapsed) {
+function BattleTimer () {
 }
 
 BattleTimer.prototype.start = function () {
@@ -116,19 +119,12 @@ BattleTimer.prototype.start = function () {
   this.tick();
 };
 
-BattleTimer.prototype.tick = function (ms) {
+BattleTimer.prototype.tick = function () {
   if (this.active) {
-    // TODO: let user specify threshholds?
-    // if time over half: green icon
-    // if time under half, over quart: yellow icon
-    // if time below quarter: red icon
-    console.log('tick tock');
     getBattleInfo();
-
-    var timer = ms || 10000;
     setTimeout(() => {
       this.tick();
-    }, timer);
+    }, 10000);
   }
 };
 
@@ -151,11 +147,6 @@ function notifyBattle () {
 function startBackground () {
   timer = new BattleTimer();
   timer.start();
-  chrome.runtime.onMessage.addListener((request, sender, sendBattle) => {
-    if (request == "battle") {
-      sendBattle(battle);
-    }
-  });
 }
 
 // stop watching for new battles
@@ -166,4 +157,9 @@ function stopBackground () {
 }
 
 // start background processing
+chrome.runtime.onMessage.addListener((request, sender, sendBattle) => {
+  if (request == "battle") {
+    sendBattle(battle);
+  }
+});
 //startBackground();

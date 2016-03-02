@@ -32,7 +32,12 @@ function loadBattleInfo () {
       var duration = battle.duration;
       var type = battle.battleType;
       var flags = battle.battleFlags;
-      var timeLeft = duration + battle.start_delta;
+      var timeReceived = battle.timeReceived;
+      console.log(timeReceived);
+      var timeLeft = (duration + battle.start_delta) - (Math.floor(Date.now() / 1000) - timeReceived);
+      var mins = Math.floor(timeLeft / 60);
+      var secs = timeLeft % 60;
+      secs = secs < 10 ? '0' + secs : secs;
       var html;
 
       html = '<a href="http://elmaonline.net/battles/' + battle.id + '"" id="levelFile" target="_blank">' + file + '</a> by <span id="designer">' + designer + '</span>';
@@ -41,7 +46,7 @@ function loadBattleInfo () {
       html = '<div>' + type + ' battle</div><div>' + flags.join(', ') + '</div>';
       document.getElementById('battleType').innerHTML = html;
 
-      html = '<span class="icon">&#xf017;</span> <span id="timeLeft">~' + Math.floor(timeLeft/60) + 'm</span> / <span id="battleTime">' + duration/60 + 'm</span>';
+      html = '<span class="icon">&#xf017;</span> <span id="timeLeft">' + mins + ':' + secs + '</span> / <span id="battleTime">' + duration/60 + 'm</span>';
       document.getElementById('timer').innerHTML = html;
 
       html = '<img src="' + battle.map + '">';
