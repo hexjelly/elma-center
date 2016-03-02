@@ -1,0 +1,109 @@
+@font-face {
+  font-family: "FontAwesome";
+  src: url("font/fontawesome-webfont.woff") format("woff");
+}
+body {
+  font-family: "Segoe UI", "Lucida Grande", "Tahoma", "sans-serif";
+  font-size: 100%;
+  background-color: rgb(35, 35, 35);
+  color: rgb(235, 235, 235);
+  padding: 0;
+  margin: 0 0 5px 0;
+  width: 350px;
+}
+main {
+  padding: 5px 10px 5px 10px;
+  border-top: 1px solid rgb(45, 45, 45);
+}
+nav {
+  display: flex;
+  background-color: rgb(25, 25, 25);
+  padding: 3px 5px 0 5px;
+  border-bottom: 1px solid black;
+}
+nav > div {
+  margin: 0 5px 0 5px;
+  padding: 0 5px 0 5px;
+  border-bottom: 2px solid rgb(100, 100, 100);
+  /* background-color: rgb(45, 45, 45); */
+}
+nav > div:not(.activeTab):hover {
+  border-bottom: 2px solid rgb(230, 230, 230);
+  cursor: pointer;
+}
+nav .activeTab {
+  border-bottom: 2px solid rgb(106, 161, 33);
+}
+#battleInfo {
+  text-align: center;
+}
+main > section {
+  display: none;
+}
+main > section.activeTab {
+  display: block;
+}
+#battleMap img {
+  margin: 5px 0 0 0;
+  border: 1px solid rgb(5, 5, 5);
+  max-width: 100%;
+}
+#battleType {
+  font-size: 80%;
+  color: rgb(150, 150, 150);
+}
+#levelInfo {
+  font-size: 100%;
+  font-weight: bold;
+}
+#levelFile {
+  color: rgb(200, 200, 200);
+  border-bottom: 1px dashed rgb(75, 75, 75);
+  text-decoration: none;
+}
+#levelFile:hover {
+  border-color: rgb(106, 161, 33);
+  color: white;
+}
+.icon {
+  font-family: "FontAwesome";
+}
+.hide {
+  display: none;
+}
+#information, #options {
+  font-size: 85%;
+}
+#information a {
+  color: rgb(150, 150, 150);
+  text-decoration: none;
+}
+#information a:hover {
+  color: rgb(190, 190, 190);
+  cursor: pointer;
+}
+label {
+  display: block;
+}
+#status {
+  margin: 3px;
+  padding: 1px 5px 3px 5px;
+  background-color: rgb(106, 161, 33);
+  border-radius: 5px;
+}
+#save {
+  margin: 5px;
+}
+.fadein {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.3s linear;
+}
+.fadeout {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 1s linear 0.5s, opacity 0.5s linear;
+}
+#button {
+  margin: 5px;
+}
