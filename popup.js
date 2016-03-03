@@ -14,13 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // navigation in popup window
-function tabs () {
+function tabs (event) {
   var actives = document.querySelectorAll('.activeTab');
   for (var i = 0; i < actives.length; i++){
     actives[i].className = '';
   }
   this.className = 'activeTab';
-  document.getElementById(event.target.getAttribute('data-link')).className = 'activeTab';
+  document.getElementById(this.getAttribute('data-link')).className = 'activeTab';
 }
 
 // load battle info from background page and display it
