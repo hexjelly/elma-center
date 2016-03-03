@@ -33,7 +33,6 @@ function loadBattleInfo () {
       var type = battle.battleType;
       var flags = battle.battleFlags;
       var timeReceived = battle.timeReceived;
-      console.log(timeReceived);
       var timeLeft = (duration + battle.start_delta) - (Math.floor(Date.now() / 1000) - timeReceived);
       var mins = Math.floor(timeLeft / 60);
       var secs = timeLeft % 60;
@@ -46,10 +45,10 @@ function loadBattleInfo () {
       html = '<div>' + type + ' battle</div><div>' + flags.join(', ') + '</div>';
       document.getElementById('battleType').innerHTML = html;
 
-      html = '<span class="icon">&#xf017;</span> <span id="timeLeft">' + mins + ':' + secs + '</span> / <span id="battleTime">' + duration/60 + 'm</span>';
+      html = '<span class="icon">&#xf017;</span> <span id="timeLeft">' + (mins >= 0 ? mins : 0) + ':' + (secs >= 0 ? secs : '00') + '</span> / <span id="battleTime">' + duration/60 + 'm</span>';
       document.getElementById('timer').innerHTML = html;
 
-      html = '<img src="' + battle.map + '">';
+      html = '<img src="' + localStorage.map + '">';
       document.getElementById('battleMap').innerHTML = html;
 
     } else { // no battle

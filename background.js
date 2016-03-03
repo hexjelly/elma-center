@@ -28,16 +28,18 @@ var timer;
 var battle = {};
 
 // XHR requests, with promises
-function getURL(url) {
+function getURL(url, img) {
   return new Promise((resolve, reject) => {
     var req = new XMLHttpRequest();
     req.open('GET', url);
-
+    if (img) {
+      req.responseType = 'arraybuffer';
+    }
     req.onload = () => {
       if (req.status == 200) {
-        resolve(req.responseText);
+        resolve(req.response);
       } else {
-        reject(Error(req.statusText));
+        reject(Error(req.status));
       }
     };
 
@@ -84,7 +86,7 @@ function getBattleInfo () {
           }
         });
         getMap(res.id).then(map => {
-          battle.map = map;
+          localStorage.map = map;
           notifyBattle();
         });
       } else { // not new
@@ -106,7 +108,11 @@ function getMap (id) {
       tempDOM.innerHTML = response;
       // getElementById not working for whatever reason, ghetto querySelector instead
       var map = tempDOM.querySelector('#right').getElementsByTagName("img")[0].getAttribute("src");
-      resolve(map);
+      getURL(map, true).then(mapdata => {
+        console.log(mapdata);
+        var map = 'data:image/png;base64,' + btoa(String.fromCharCode.apply(null, new Uint8Array(mapdata)));
+        resolve(map);
+      });
     });
   });
 }
@@ -137,7 +143,7 @@ function notifyBattle () {
   chrome.notifications.create('NewBattle', {
     type: 'image',
     iconUrl: 'images/icon128.png',
-    imageUrl: battle.map,
+    imageUrl: localStorage.map,
     title: battle.file_name + " by " + battle.designer,
     message: battle.battleType + " battle " + battle.duration/60 + 'm\n' + battle.battleFlags.join(', ')
   });
