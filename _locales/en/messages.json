@@ -1,5 +1,55 @@
 {
-  "battle": { "message": "battle" },
-  "by": { "message": "by" },
-  "normalBattle": { "message": "Normal battle" }
+  "navigation": {
+    "battle": { "message": "Battle" },
+    "options": { "message": "Options" },
+    "info": { "message": "Info" }
+  },
+  "battleinfo": {
+    "type": {
+      "normal": { "message": "Normal" },
+      "onelife": { "message": "One life" },
+      "ff": { "message": "First finish" },
+      "slow": { "message": "Slowness" },
+      "survivor": { "message": "Survivor" },
+      "last": { "message": "Last result" },
+      "finishcount": { "message": "Finish count" },
+      "tt": { "message": "1 Hour TT" },
+      "flagtag": { "message": "Flag tag" },
+      "apple": { "message": "Apple" },
+      "speed": { "message": "Speed" },
+    },
+    "flag": {
+      "others": { "message": "See others" },
+      "times": { "message": "See times" },
+      "starter": { "message": "Allow starter" },
+      "bug": { "message": "Apple bug" },
+      "novolt": { "message": "No volt" },
+      "noturn": { "message": "No turn" },
+      "oneturn": { "message": "One turn" },
+      "nobrake": { "message": "No brake" },
+      "nothrottle": { "message": "No throttle" },
+      "throttle": { "message": "Always throttle" },
+      "drunk": { "message": "Drunk" },
+      "onewheel": { "message": "One-wheel" },
+      "multi": { "message": "Multi" }
+    }
+  },
+  "battletab": {
+    "battle": { "message": "battle" },
+    "by": { "message": "by" },
+    "nobattle": { "message": "No active battle" },
+    "disabled": { "message": "Battle information disabled" }
+  },
+  "optionstab": {
+    "battle": { "message": "Check for new battles" },
+    "notification": { "message": "Enable popup notifications" },
+    "icon": { "message": "Enable icon indicator" },
+    "button": { "message": "Save settings" },
+    "saved": { "message": "Saved" }
+  },
+  "infotab": {
+    "source": { "message": "Source code" },
+    "extension": { "message": "Extension page" },
+    "comments": { "message": "Comments, discussion, ideas" },
+  }
 }
