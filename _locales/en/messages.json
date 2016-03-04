@@ -45,7 +45,8 @@
     "notification": { "message": "Enable popup notifications" },
     "icon": { "message": "Enable icon indicator" },
     "button": { "message": "Save settings" },
-    "saved": { "message": "Saved" }
+    "saved": { "message": "Saved" },
+    "localization": { "message": "Disable localization" }
   },
   "infotab": {
     "source": { "message": "Source code" },

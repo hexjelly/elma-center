@@ -1,0 +1,56 @@
+{
+  "navigation": {
+    "battle": { "message": "Bitwa" },
+    "options": { "message": "Ustawienia" },
+    "info": { "message": "Informacje" }
+  },
+  "battleinfo": {
+    "type": {
+      "normal": { "message": "Zwykła" },
+      "onelife": { "message": "Jedno życie" },
+      "ff": { "message": "Pierwszy na mecie" },
+      "slow": { "message": "Najwolniejszy" },
+      "survivor": { "message": "Przetrwanie" },
+      "last": { "message": "Ostatni finisz" },
+      "finishcount": { "message": "Zliczanie finiszów" },
+      "tt": { "message": "Czas całkowity" },
+      "flagtag": { "message": "Berek" },
+      "apple": { "message": "Zbieranie jabłek" },
+      "speed": { "message": "Najszybszy" },
+    },
+    "flag": {
+      "others": { "message": "Pokaż innych" },
+      "times": { "message": "Pokaż czasy" },
+      "starter": { "message": "Starter może grać" },
+      "bug": { "message": "Bez bugów" },
+      "novolt": { "message": "Bez obracania" },
+      "noturn": { "message": "Bez zmian kierunku jazdy" },
+      "oneturn": { "message": "Jedna zmiana kierunku jazdy" },
+      "nobrake": { "message": "Bez hamulca" },
+      "nothrottle": { "message": "Bez gazu" },
+      "throttle": { "message": "Gaz non-stop" },
+      "drunk": { "message": "Pijany" },
+      "onewheel": { "message": "Na jednym kole" },
+      "multi": { "message": "2 graczy" }
+    }
+  },
+  "battletab": {
+    "battle": { "message": "bitwa" },
+    "by": { "message": "stworzona przez" },
+    "nobattle": { "message": "Brak aktywnych bitew" },
+    "disabled": { "message": "Informacje o bitwie są niedostępne" }
+  },
+  "optionstab": {
+    "battle": { "message": "Sprawdź czy są nowe bitwy" },
+    "notification": { "message": "Zezwól na wyświetlanie powiadomień" },
+    "icon": { "message": "Włącz interaktywną ikonę" },
+    "button": { "message": "Zapisz ustawienia" },
+    "saved": { "message": "Zapisano" },
+    "localization": { "message": "Wyłącz tłumaczenie" }
+  },
+  "infotab": {
+    "source": { "message": "Kod źródłowy" },
+    "extension": { "message": "Strona rozszerzenia" },
+    "comments": { "message": "Komentarze, dyskusje, sugestie" },
+  }
+}

@@ -1,5 +1,56 @@
 {
-  "battle": { "message": "battle" },
-  "by": { "message": "tehnyt" },
-  "normalBattle": { "message": "Normaali battle" }
+  "navigation": {
+    "battle": { "message": "Taisto" },
+    "options": { "message": "Valikko" },
+    "info": { "message": "Info" }
+  },
+  "battleinfo": {
+    "type": {
+      "normal": { "message": "Normaali" },
+      "onelife": { "message": "Yksi elämä" },
+      "ff": { "message": "Ensimmäinen maalissa" },
+      "slow": { "message": "Hitaus" },
+      "survivor": { "message": "Selviytyjä" },
+      "last": { "message": "Viimeisin tulos" },
+      "finishcount": { "message": "Läpäisyjen lasku" },
+      "tt": { "message": "Yhden tunnin totaaliaika" },
+      "flagtag": { "message": "Lippuhippa" },
+      "apple": { "message": "Omena" },
+      "speed": { "message": "Vauhti" },
+    },
+    "flag": {
+      "others": { "message": "Näe mmut" },
+      "times": { "message": "Näe ajat" },
+      "starter": { "message": "Salli aloittaja" },
+      "bug": { "message": "Omena hyönteinen" },
+      "novolt": { "message": "Ei volttia" },
+      "noturn": { "message": "Ei käännöstä" },
+      "oneturn": { "message": "Yksi käännös" },
+      "nobrake": { "message": "Ei jarrua" },
+      "nothrottle": { "message": "Ei kaasua" },
+      "throttle": { "message": "Aina kaasua" },
+      "drunk": { "message": "Kännissä" },
+      "onewheel": { "message": "Keuliminen" },
+      "multi": { "message": "Moninpeli" }
+    }
+  },
+  "battletab": {
+    "battle": { "message": "taisto" },
+    "by": { "message": "tehnyt" },
+    "nobattle": { "message": "Ei aktiivista taistoa" },
+    "disabled": { "message": "Taiston informaatio vammainen" }
+  },
+  "optionstab": {
+    "battle": { "message": "Tarkista uusia taistoja" },
+    "notification": { "message": "Ponnahdusikkunat päällä" },
+    "icon": { "message": "Olpmo omdolaattpro päällä" },
+    "button": { "message": "Tallenna asetukset" },
+    "saved": { "message": "Tallennettu" },
+    "localization": { "message": "Poista lokalisointi käytöstä" }
+  },
+  "infotab": {
+    "source": { "message": "Koodi lähdekoodi" },
+    "extension": { "message": "Laajennussivusto" },
+    "comments": { "message": "Kommentit, keskustelu, ideat" },
+  }
 }
