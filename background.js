@@ -26,6 +26,7 @@ var APIurl = "http://108.61.164.75:8880/current_battle?json=1";
 var EOLurl = "http://elmaonline.net/battles/";
 var timer;
 var battle = {};
+var settings = {};
 
 // XHR requests, with promises
 function getURL(url, img) {
@@ -87,12 +88,12 @@ function getBattleInfo () {
         });
         getMap(res.id).then(map => {
           localStorage.map = map;
-          notifyBattle();
+          if (settings.notification) notifyBattle();
         });
       } else { // not new
 
       }
-      setTimeIndicatorIcon([res.duration, res.start_delta]);
+      if (settings.icon) setTimeIndicatorIcon([res.duration, res.start_delta]);
     } else { // no battle active
       battle = {};
       setTimeIndicatorIcon(false);
@@ -109,7 +110,6 @@ function getMap (id) {
       // getElementById not working for whatever reason, ghetto querySelector instead
       var map = tempDOM.querySelector('#right').getElementsByTagName("img")[0].getAttribute("src");
       getURL(map, true).then(mapdata => {
-        console.log(mapdata);
         var map = 'data:image/png;base64,' + btoa(String.fromCharCode.apply(null, new Uint8Array(mapdata)));
         resolve(map);
       });
@@ -151,21 +151,50 @@ function notifyBattle () {
 
 // start watching for new battles
 function startBackground () {
-  timer = new BattleTimer();
-  timer.start();
+  // load settings
+  chrome.storage.sync.get({
+    battle: true,
+    notification: true,
+    icon: true
+  }, items => {
+    settings = items;
+
+    if (settings.battle) {
+      timer = new BattleTimer();
+      timer.start();
+    }
+  });
 }
 
 // stop watching for new battles
 function stopBackground () {
   setTimeIndicatorIcon(false);
-  timer.stop();
+  if (timer) timer.stop();
   battle = {};
 }
 
-// start background processing
+/** start background processing **/
+
+// listen to storage changes for settings
+chrome.storage.onChanged.addListener((changes) => {
+  for (var val in changes) {
+    settings[val] = changes[val].newValue;
+    if (val === 'battle' && changes[val].newValue === false) {
+      stopBackground();
+    } else if (val === 'battle' && changes[val].newValue === true) {
+      startBackground();
+    } else if (val === 'icon' && changes[val].newValue === false) {
+      setTimeIndicatorIcon(false);
+    }
+  }
+});
+
+// sends back battle information to popup page when requested
 chrome.runtime.onMessage.addListener((request, sender, sendBattle) => {
   if (request == "battle") {
     sendBattle(battle);
   }
 });
-//startBackground();
+
+// start the stuff
+startBackground();

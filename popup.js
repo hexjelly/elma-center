@@ -8,8 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('save').addEventListener('click', saveOptions);
 
-  loadBattleInfo();
   loadOptions();
+  chrome.storage.sync.get({
+    battle: true,
+  }, items => {
+    if (items.battle) {
+      loadBattleInfo();
+    } else {
+      document.getElementById('levelInfo').innerHTML = "Battle information disabled.";
+    }
+  });
 });
 
 
