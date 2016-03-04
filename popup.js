@@ -56,7 +56,7 @@ function loadBattleInfo () {
       html = '<span class="icon">&#xf017;</span> <span id="timeLeft">' + (mins >= 0 ? mins : 0) + ':' + (secs >= 0 ? secs : '00') + '</span> / <span id="battleTime">' + duration/60 + 'm</span>';
       document.getElementById('timer').innerHTML = html;
 
-      html = '<img src="' + localStorage.map + '">';
+      html = '<img src="' + battle.map + '">';
       document.getElementById('battleMap').innerHTML = html;
 
     } else { // no battle

@@ -87,7 +87,7 @@ function getBattleInfo () {
           }
         });
         getMap(res.id).then(map => {
-          localStorage.map = map;
+          battle.map = map;
           if (settings.notification) notifyBattle();
         });
       } else { // not new
@@ -143,7 +143,7 @@ function notifyBattle () {
   chrome.notifications.create('NewBattle', {
     type: 'image',
     iconUrl: 'images/icon128.png',
-    imageUrl: localStorage.map,
+    imageUrl: battle.map,
     title: battle.file_name + " by " + battle.designer,
     message: battle.battleType + " battle " + battle.duration/60 + 'm\n' + battle.battleFlags.join(', ')
   });
