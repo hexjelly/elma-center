@@ -10,28 +10,29 @@
 
   <body>
     <nav id="nav">
-      <div id="battleLink" class="activeTab" data-link="battleInfo"><span class="icon">&#xf091;</span> Battle</div>
-      <div id="optionsLink" data-link="options"><span class="icon">&#xf013;</span> Options</div>
-      <div id="infoLink" data-link="information"><span class="icon">&#xf05a;</span> Info</div>
+      <div id="battleLink" class="activeTab" data-link="battleInfo"><span class="icon">&#xf091;</span> <span id="navbattle"></span></div>
+      <div id="optionsLink" data-link="options"><span class="icon">&#xf013;</span> <span id="navoptions"></span></div>
+      <div id="infoLink" data-link="information"><span class="icon">&#xf05a;</span> <span id="navinfo"></span></div>
     </nav>
 
     <main>
       <section id="battleInfo" class="activeTab">
-        <header id="levelInfo">No battle active</header>
+        <header id="levelInfo"></header>
         <header id="battleType"></header>
         <div id="battleMap"></div>
         <div id="timer"></div>
       </section>
       <section id="options">
-          <label><input type="checkbox" id="settingBattle">Check for new battles</label>
-          <label><input type="checkbox" id="settingNotification">Enable popup notifications</label>
-          <label><input type="checkbox" id="settingIcon">Enable icon indicator</label>
-          <div id="button"><button id="save" type="button">Save settings</button><span id="status" class="hide">Saved</span></div>
+          <label><input type="checkbox" id="settingBattle"><span id="optbattle"></span></label>
+          <label><input type="checkbox" id="settingNotification"><span id="optnotification"></span></label>
+          <label><input type="checkbox" id="settingIcon"><span id="opticon"></span></label>
+          <label><input type="checkbox" id="settingLocalization"><span id="optlocalization"></span></label>
+          <div id="button"><button id="save" type="button"></button><span id="status" class="hide"></span></div>
       </section>
       <section id="information">
-        <div><a href="https://github.com/hexjelly/elma-center/" target="_blank"><span class="icon">&#xf09b;</span> Github</a> Source code</div>
-        <div><a href="" target="_blank"><span class="icon">&#xf1a0;</span> Google Webstore</a> Extension page</div>
-        <div><a href="" target="_blank"><span class="icon">&#xf08e;</span> Mopolauta</a> Comments, discussion, ideas.</div>
+        <div><a href="https://github.com/hexjelly/elma-center/" target="_blank"><span class="icon">&#xf09b;</span> Github</a> <span id="source"></span></div>
+        <div><a href="" target="_blank"><span class="icon">&#xf1a0;</span> Google Webstore</a> <span id="extension"></span></div>
+        <div><a href="" target="_blank"><span class="icon">&#xf08e;</span> Mopolauta</a> <span id="comments"></span></div>
       </section>
     </main>
 

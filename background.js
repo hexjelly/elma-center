@@ -2,24 +2,34 @@
 
 // battle API mode flags
 const FLAGS = [
-  { "mask": 1, "attr": "See others" },
-  { "mask": 2, "attr": "See times" },
-  { "mask": 4, "attr": "Allow starter" },
-  { "mask": 8, "attr": "Apple bug" },
-  { "mask": 16, "attr": "No volt" },
-  { "mask": 32, "attr": "No turn" },
-  { "mask": 64, "attr": "One turn" },
-  { "mask": 128, "attr": "No brake" },
-  { "mask": 256, "attr": "No throttle" },
-  { "mask": 512, "attr": "Always throttle" },
-  { "mask": 1024, "attr": "Drunk" },
-  { "mask": 4096, "attr": "One wheel" },
-  { "mask": 8192, "attr": "Multi" }
+  { "mask": 1, "default": "See others", "i18n": "others" },
+  { "mask": 2, "default": "See times", "i18n": "times" },
+  { "mask": 4, "default": "Allow starter", "i18n": "starter" },
+  { "mask": 8, "default": "Apple bug", "i18n": "bug" },
+  { "mask": 16, "default": "No volt", "i18n": "novolt" },
+  { "mask": 32, "default": "No turn", "i18n": "noturn" },
+  { "mask": 64, "default": "One turn", "i18n": "oneturn" },
+  { "mask": 128, "default": "No brake", "i18n": "nobrake" },
+  { "mask": 256, "default": "No throttle", "i18n": "nothrottle" },
+  { "mask": 512, "default": "Always throttle", "i18n": "throttle" },
+  { "mask": 1024, "default": "Drunk", "i18n": "drunk" },
+  { "mask": 4096, "default": "One-wheel", "i18n": "onewheel" },
+  { "mask": 8192, "default": "Multi", "i18n": "multi" }
 ];
 
 // battle API battle type
 const TYPES = [
-  "Normal", "One life", "First finish", "Slowness", "Survivor", "Last result", "Finish count", "1 Hour TT", "Flag tag", "Apple", "Speed"
+  { "default": "Normal", "i18n": "normal" },
+  { "default": "One life", "i18n": "onelife" },
+  { "default": "First finish", "i18n": "ff" },
+  { "default": "Slowness", "i18n": "slow" },
+  { "default": "Survivor", "i18n": "survivor" },
+  { "default": "Last result", "i18n": "last" },
+  { "default": "Finish Count", "i18n": "finishcount" },
+  { "default": "1 hour TT", "i18n": "tt" },
+  { "default": "Flag tag", "i18n": "flagtag" },
+  { "default": "Apple", "i18n": "apple" },
+  { "default": "Speed", "i18n": "speed" }
 ];
 
 var APIurl = "http://108.61.164.75:8880/current_battle?json=1";
@@ -27,6 +37,14 @@ var EOLurl = "http://elmaonline.net/battles/";
 var timer;
 var battle = {};
 var settings = {};
+
+// translation
+function translate(message, defaultmessage) {
+  if (!settings.localization) {
+    return chrome.i18n.getMessage(message);
+  }
+  return defaultmessage;
+}
 
 // XHR requests, with promises
 function getURL(url, img) {
@@ -80,10 +98,10 @@ function getBattleInfo () {
         battle = res;
         battle.timeReceived = Math.floor(Date.now() / 1000);
         battle.battleFlags = [];
-        battle.battleType = TYPES[battle.battle_type];
+        battle.battleType = translate(TYPES[battle.battle_type].i18n, TYPES[battle.battle_type].default);
         FLAGS.forEach(flag => {
           if (battle.battle_attrs & flag.mask) {
-            battle.battleFlags.push(flag.attr);
+            battle.battleFlags.push(translate(flag.i18n, flag.default));
           }
         });
         getMap(res.id).then(map => {
@@ -144,8 +162,8 @@ function notifyBattle () {
     type: 'image',
     iconUrl: 'images/icon128.png',
     imageUrl: battle.map,
-    title: battle.file_name + " by " + battle.designer,
-    message: battle.battleType + " battle " + battle.duration/60 + 'm\n' + battle.battleFlags.join(', ')
+    title: battle.file_name + " " + translate("by", "by") + " " + battle.designer,
+    message: battle.battleType + " " + translate("battle", "battle") + " " + battle.duration/60 + 'm\n' + battle.battleFlags.join(', ')
   });
 }
 
