@@ -32,7 +32,7 @@
   "disabled": { "message": "Taiston informaatio vammainen" },
   "optbattle": { "message": "Tarkista uusia taistoja" },
   "optnotification": { "message": "Ponnahdusikkunat päällä" },
-  "opticon": { "message": "Olpmo omdolaattpro päällä" },
+  "opticon": { "message": "Ikoni indikaattori päällä" },
   "optbutton": { "message": "Tallenna asetukset" },
   "optsaved": { "message": "Tallennettu" },
   "optlocalization": { "message": "Poista lokalisointi käytöstä" },
