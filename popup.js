@@ -50,7 +50,7 @@ function loadBattleInfo () {
       html = '<a href="http://elmaonline.net/battles/' + battle.id + '"" id="levelFile" target="_blank">' + file + '</a> ' + translate('by', 'by') + ' <span id="designer">' + designer + '</span>';
       document.getElementById('levelInfo').innerHTML = html;
 
-      html = '<div>' + type + ' battle</div><div>' + flags.join(', ') + '</div>';
+      html = '<div>' + type + ' ' + translate("battle", "battle") + '</div><div>' + flags.join(', ') + '</div>';
       document.getElementById('battleType').innerHTML = html;
 
       html = '<span class="icon">&#xf017;</span> <span id="timeLeft">' + (mins >= 0 ? mins : 0) + ':' + (secs >= 0 ? secs : '00') + '</span> / <span id="battleTime">' + duration/60 + 'm</span>';
