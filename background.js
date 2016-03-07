@@ -111,7 +111,7 @@ function getBattleInfo () {
       } else { // not new
 
       }
-      if (settings.icon) setTimeIndicatorIcon([res.duration, res.start_delta]);
+      if (settings.icon && settings.battle) setTimeIndicatorIcon([res.duration, res.start_delta]);
     } else { // no battle active
       battle = {};
       setTimeIndicatorIcon(false);
